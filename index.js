@@ -30,3 +30,9 @@ const addUser = (user) => {
     payload: user,
   };
 };
+
+
+// 1. state
+// 2. dispatch action
+// 3. reducer
+// 4. store
