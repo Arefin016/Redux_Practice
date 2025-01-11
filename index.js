@@ -6,52 +6,29 @@
 const { createStore } = require("redux");
 
 // CONSTANTS
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
-const RESET = "RESET";
+const ADD_USER = "ADD_USER";
 
 // State
 const initialState = {
-  count: 0,
+  users: ["Shah Arefin Ahmed"],
+  count: 1,
 };
 
-// action
-const incrementCounterAction = () => {
+// action -- Object -- type, payload
+const addUser = (user) => {
   return {
-    type: INCREMENT,
-  };
-};
-
-const decrementCounterAction = () => {
-  return {
-    type: DECREMENT,
-  };
-};
-
-const resetCounterAction = () => {
-  return {
-    type: RESET,
+    type: ADD_USER,
+    payload: user,
   };
 };
 
 // CREATING REDUCER - Reducer does logic handle
-const counterReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT:
+    case ADD_USER:
       return {
-        ...state,
+        users: [...state.users, action.payload],
         count: state.count + 1,
-      };
-    case DECREMENT:
-      return {
-        ...state,
-        count: state.count - 1,
-      };
-
-    case RESET:
-      return {
-        ...state,
-        count: 0,
       };
 
     default:
@@ -60,15 +37,11 @@ const counterReducer = (state = initialState, action) => {
 };
 
 // store
-const store = createStore(counterReducer);
+const store = createStore(userReducer);
 
 store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch(incrementCounterAction());
-store.dispatch(incrementCounterAction());
-store.dispatch(incrementCounterAction());
-store.dispatch(decrementCounterAction());
-store.dispatch(resetCounterAction());
-store.dispatch(incrementCounterAction());
+store.dispatch(addUser("Farok Hossain"));
+store.dispatch(addUser("Omor Rabby"));
